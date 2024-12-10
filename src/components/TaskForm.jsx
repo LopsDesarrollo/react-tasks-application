@@ -11,6 +11,9 @@ function TaskForm({createTask}) {
         title,
         description
     });
+    //Limpiamos formulario
+    setTitle('');
+    setDescription('');
   };
 
   return (
@@ -18,9 +21,12 @@ function TaskForm({createTask}) {
       <input
         placeholder="Escribe tu tarea"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
       />
       <textarea placeholder="Escribe la descripcion de la tarea"
-        onChange={(e)=> setDescription(e.target.value)}></textarea>
+        onChange={(e)=> setDescription(e.target.value)}
+        value={description}
+        ></textarea>
       <button>Guardar</button>
     </form>
   );
