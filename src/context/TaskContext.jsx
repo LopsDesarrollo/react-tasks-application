@@ -1,12 +1,29 @@
-import  { createContext } from 'react'
+import { createContext, useState } from "react";
 
-export const TaskContext = createContext()
+export const TaskContext = createContext();
 
 export function TaskContextProvider(props) {
-    let x = 20
+  const [tasks, setTasks] = useState([]);
+
+  function createTask(task) {
+    setTasks([
+      ...tasks,
+      {
+        title: task.title,
+        id: tasks.length,
+        description: task.description,
+      },
+    ]);
+  }
+
+  function deleteTask(taskId) {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  }
   return (
-    <TaskContext.Provider value={x}>
-        {props.children}
-    </TaskContext.Provider>
-)
+    <TaskContext.Provider value={{
+        tasks: tasks,
+        createTask: createTask,
+        deleteTask: deleteTask
+    }}>{props.children}</TaskContext.Provider>
+  );
 }
